@@ -1,5 +1,5 @@
 """
-You are given a binary tree. You need to write a function that can determin if
+You are given a binary tree. You need to write a function that can determine if
 it is a valid binary search tree.
 
 The rules for a valid binary search tree are:
@@ -38,6 +38,34 @@ class TreeNode:
         self.left = left
         self.right = right
 
-def is_valid_BST(self, root):
+def is_valid_BST(root):
     # Your code here
+    if root.left is None and root.right is None:
+        return True
 
+    if root.left is not None:
+        if root.value < root.left.value:
+            return False
+
+    if root.right is not None:
+        if root.value > root.right.value:
+            return False
+    
+    leftValid = is_valid_BST(root.left)
+    rightValid = is_valid_BST(root.right)
+
+    if (leftValid and rightValid):
+        return True
+
+rootValidTree = TreeNode(5)
+rootValidTree.left = TreeNode(3)
+rootValidTree.right = TreeNode(7)
+
+rootInvalidTree = TreeNode(10)
+rootInvalidTree.left = TreeNode(2)
+rootInvalidTree.right = TreeNode(8)
+rootInvalidTree.right.left = TreeNode(6)
+rootInvalidTree.right.right = TreeNode(12)
+
+print(is_valid_BST(rootValidTree))
+print(is_valid_BST(rootInvalidTree))

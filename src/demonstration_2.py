@@ -39,7 +39,6 @@ class TreeNode:
         self.right = right
 
 def is_valid_BST(root):
-    # Your code here
     if root.left is None and root.right is None:
         return True
 

@@ -40,4 +40,6 @@ root.left.right.right = TreeNode(14)
 
 
 print(minValue(root))
-print(findInorderSucc(root, root.left.right.right))
+print(findInorderSucc(root, root.left.right))
+print(findInorderSucc(root, root.right))
+

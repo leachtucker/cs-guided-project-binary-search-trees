@@ -39,22 +39,25 @@ class TreeNode:
         self.right = right
 
 def is_valid_BST(root):
-    if root.left is None and root.right is None:
-        return True
+    leftValid = True
+    rightValid = True
 
     if root.left is not None:
+        leftValid = is_valid_BST(root.left)
+
         if root.value < root.left.value:
             return False
 
     if root.right is not None:
+        rightValid = is_valid_BST(root.right)
+
         if root.value > root.right.value:
             return False
-    
-    leftValid = is_valid_BST(root.left)
-    rightValid = is_valid_BST(root.right)
 
-    if (leftValid and rightValid):
+    if leftValid == True and rightValid == True:
         return True
+    else:
+        return False
 
 rootValidTree = TreeNode(5)
 rootValidTree.left = TreeNode(3)
@@ -66,5 +69,12 @@ rootInvalidTree.right = TreeNode(8)
 rootInvalidTree.right.left = TreeNode(6)
 rootInvalidTree.right.right = TreeNode(12)
 
-print(is_valid_BST(rootValidTree))
-print(is_valid_BST(rootInvalidTree))
+invalidTree2 = TreeNode(20)
+invalidTree2.left = TreeNode(10)
+invalidTree2.left.right = TreeNode(5)
+invalidTree2.right = TreeNode(30)
+
+print(f'1st tree is: {is_valid_BST(rootValidTree)}')
+print(f'2nd tree is: {is_valid_BST(rootInvalidTree)}')
+print(f'3rd tree is: {is_valid_BST(invalidTree2)}')
+
